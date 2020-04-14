@@ -2,7 +2,10 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://caption"
         messagesPack="de.balvi.ope.web.screens">
+    <actions>
+        <action id="solveAction"/>
+    </actions>
     <layout>
-        <button id="problemSolveButton" caption="Solve!"/>
+        <button id="problemSolveButton" action="solveAction"/>
     </layout>
 </window>
