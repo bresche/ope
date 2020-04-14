@@ -7,5 +7,6 @@
     <context:component-scan base-package="de.balvi.ope"/>
     
     <gui:screens base-packages="de.balvi.ope.web"/>
+    <gui:actions base-packages="de.balvi.ope.web.actions"/>
 
 </beans>
