@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver>
+    <!-- Domain model configuration -->
+    <scanAnnotatedClasses/>
+
+    <!-- Score configuration -->
+    <scoreDirectorFactory>
+        <!--<easyScoreCalculatorClass>org.optaplanner.examples.cloudbalancing.optional.score.CloudBalancingEasyScoreCalculator</easyScoreCalculatorClass>-->
+        <scoreDrl>de/balvi/ope/core/optaplanner/resources/intCountRules.drl</scoreDrl>
+    </scoreDirectorFactory>
+
+    <!-- Optimization algorithms configuration -->
+    <termination>
+        <secondsSpentLimit>10</secondsSpentLimit>
+        <bestScoreLimit>0hard/-5000soft</bestScoreLimit>
+    </termination>
+</solver>
