@@ -1,0 +1,9 @@
+global HardSoftScoreHolder scoreHolder;
+
+rule "noNullRoomPeriod"
+    when
+        Lecture( roomNumber == null );
+        Lecture( period == null );
+    then
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end

@@ -3,7 +3,7 @@
         caption="msg://caption"
         messagesPack="de.balvi.ope.web.screens">
     <actions>
-        <action id="solveAction"/>
+        <action id="solveAction" caption="msg://solve"/>
     </actions>
     <layout>
         <button id="problemSolveButton" action="solveAction"/>

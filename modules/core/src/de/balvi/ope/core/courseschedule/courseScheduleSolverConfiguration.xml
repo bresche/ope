@@ -1,0 +1,9 @@
+<solver>
+    <scanAnnotatedClasses/>
+    <scoreDirectorFactory>
+        <easyScoreCalculatorClass>de.balvi.ope.core.courseschedule.ScoreCalculator</easyScoreCalculatorClass>
+    </scoreDirectorFactory>
+    <termination>
+        <secondsSpentLimit>30</secondsSpentLimit>
+    </termination>
+</solver>

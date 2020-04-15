@@ -8,5 +8,13 @@
     
     <gui:screens base-packages="de.balvi.ope.web"/>
     <gui:actions base-packages="de.balvi.ope.web.actions"/>
+    <bean id="ope_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="ope_CourseScheduleSolveService" value="de.balvi.ope.service.CourseScheduleSolveService"/>
+            </map>
+        </property>
+    </bean>
 
 </beans>
