@@ -1,4 +1,4 @@
-package de.balvi.ope.core.optaplanner;
+package de.balvi.ope.core.integerexample;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

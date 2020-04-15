@@ -1,6 +1,5 @@
-package de.balvi.ope.core.optaplanner;
+package de.balvi.ope.core.integerexample;
 
-import org.eclipse.persistence.jpa.jpql.tools.model.query.LikeExpressionStateObject;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;

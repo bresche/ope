@@ -1,4 +1,4 @@
-package de.balvi.ope.core.optaplanner;
+package de.balvi.ope.core.integerexample;
 
 @org.optaplanner.core.api.domain.entity.PlanningEntity
 public class IntValuePlanningEntity {
