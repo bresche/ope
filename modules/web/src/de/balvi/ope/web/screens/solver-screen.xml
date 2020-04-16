@@ -3,9 +3,11 @@
         caption="msg://caption"
         messagesPack="de.balvi.ope.web.screens">
     <actions>
-        <action id="solveAction" caption="msg://solve"/>
+        <action id="solveActionJava" caption="msg://solveJava"/>
+        <action id="solveActionDrools" caption="msg://solveDrools"/>
     </actions>
     <layout>
-        <button id="problemSolveButton" action="solveAction"/>
+        <button id="problemSolveButton" action="solveActionJava"/>
+        <button id="problemSolveButton2" action="solveActionDrools"/>
     </layout>
 </window>

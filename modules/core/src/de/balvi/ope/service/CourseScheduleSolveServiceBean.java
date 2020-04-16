@@ -28,6 +28,23 @@ public class CourseScheduleSolveServiceBean implements CourseScheduleSolveServic
         return courseScheduleToString(solvedCourseSchedule.getLectureList()) ;
     }
 
+    @Override
+    public List<String> solveCourseScheduleWithDrools() {
+        SolverFactory<CourseSchedule> solverFactory = SolverFactory
+                .createFromXmlResource(
+                        "de/balvi/ope/core/courseschedule/courseScheduleSolverWithDroolsConfiguration.xml",
+                        getClass().getClassLoader()
+                );
+
+        Solver<CourseSchedule> courseScheduleSolver = solverFactory.buildSolver();
+
+        CourseSchedule unsolvedCourseSchedule = getUnsolvedCourseScheduleExampleData();
+
+        CourseSchedule solvedCourseSchedule = courseScheduleSolver.solve(unsolvedCourseSchedule);
+
+        return courseScheduleToString(solvedCourseSchedule.getLectureList()) ;
+    }
+
     public List<String> courseScheduleToString(List<Lecture> solvedCourseSchedule) {
         return solvedCourseSchedule.stream()
                 .map(c -> "Lecture in Room "

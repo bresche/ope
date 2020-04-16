@@ -23,17 +23,34 @@ public class SolverScreen extends Screen {
     @Inject
     private CourseScheduleSolveService courseScheduleSolveService;
 
-    @Subscribe("solveAction")
-    public void onSolveAction(Action.ActionPerformedEvent event) {
+    @Subscribe("solveActionJava")
+    public void onSolveActionJava
+            (Action.ActionPerformedEvent event) {
         notifications.create().withDescription("Start solving...").show();
 
-        List<String> solveCourseSchedule = courseScheduleSolveService.solveCourseSchedule();
+        List<String> solvedCourseSchedule = courseScheduleSolveService.solveCourseSchedule();
 
-        String result = String.join("\n", solveCourseSchedule);
+        String result = String.join("\n", solvedCourseSchedule);
         notifications.create().withCaption("Solved!").withDescription(result).show();
 
         log.info(result);
     }
+
+    @Subscribe("solveActionDrools")
+    public void onSolveActionDrools(Action.ActionPerformedEvent event) {
+
+        notifications.create().withDescription("Start solving...").show();
+
+        List<String> solvedCourseSchedule = courseScheduleSolveService.solveCourseScheduleWithDrools();
+
+        String result = String.join("\n", solvedCourseSchedule);
+        notifications.create().withCaption("Solved!").withDescription(result).show();
+
+        log.info(result);
+
+    }
+
+
 
 
 }

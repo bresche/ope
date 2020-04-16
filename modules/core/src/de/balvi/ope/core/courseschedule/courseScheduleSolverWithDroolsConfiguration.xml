@@ -1,0 +1,9 @@
+<solver>
+    <scanAnnotatedClasses/>
+    <scoreDirectorFactory>
+        <scoreDrl>de/balvi/ope/core/courseschedule/courseScheduleSolverWithDroolsConfiguration.xml</scoreDrl>
+    </scoreDirectorFactory>
+    <termination>
+        <secondsSpentLimit>30</secondsSpentLimit>
+    </termination>
+</solver>

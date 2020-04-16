@@ -1,4 +1,6 @@
-global HardSoftScoreHolder scoreHolder;
+import de.balvi.ope.core.courseschedule.*
+
+global org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder scoreHolder;
 
 rule "noNullRoomPeriod"
     when

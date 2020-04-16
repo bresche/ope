@@ -6,4 +6,6 @@ public interface CourseScheduleSolveService {
     String NAME = "ope_CourseScheduleSolveService";
 
     List<String> solveCourseSchedule();
+
+    List<String> solveCourseScheduleWithDrools();
 }
