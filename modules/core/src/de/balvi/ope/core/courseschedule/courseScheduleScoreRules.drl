@@ -4,8 +4,31 @@ global org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder score
 
 rule "noNullRoomPeriod"
     when
-        Lecture( roomNumber == null );
-        Lecture( period == null );
+        $lecture1: Lecture( roomNumber == null );
+        $lecture2: Lecture( period == null );
+
     then
+     scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "periodAlreadyOccupied"
+    when
+        //compares two instances of Lecture (randomly picked?)
+        $lecture1: Lecture( $period : period );
+        $lecture2: Lecture( period == $period);
+
+    then
+        System.out.println("room " + $lecture1.getPeriod() + " & " + $lecture2.getPeriod() + " -1");
+        scoreHolder.addHardConstraintMatch(kcontext, -1);
+end
+
+rule "roomAlreadyOccupied"
+    when
+        //compares two instances of Lecture
+        $lecture1: Lecture( $roomNumber : roomNumber );
+        $lecture2: Lecture( roomNumber == $roomNumber);
+
+    then
+        System.out.println("period " + $lecture1.getRoomNumber() + " & " + $lecture2.getRoomNumber() + " -1");
         scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
