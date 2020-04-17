@@ -97,24 +97,25 @@ public class CourseScheduleSolveServiceBean implements CourseScheduleSolveServic
         courseSchedule.getRoomList().add(2);
         courseSchedule.getRoomList().add(3);
 
-        courseSchedule.getLectureList().add(createLecture("Teacher 1"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 2"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 3"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 4"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 5"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 6"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 7"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 8"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 9"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 10"));
-        courseSchedule.getLectureList().add(createLecture("Teacher 11"));
+        courseSchedule.getLectureList().add(createLecture("Teacher 1", 50));
+        courseSchedule.getLectureList().add(createLecture("Teacher 2", 50));
+        courseSchedule.getLectureList().add(createLecture("Teacher 3", 50));
+        courseSchedule.getLectureList().add(createLecture("Teacher 4", 50));
+        courseSchedule.getLectureList().add(createLecture("Teacher 5", 100));
+        courseSchedule.getLectureList().add(createLecture("Teacher 6", 100));
+        courseSchedule.getLectureList().add(createLecture("Teacher 7", 100));
+//        courseSchedule.getLectureList().add(createLecture("Teacher 8"));
+//        courseSchedule.getLectureList().add(createLecture("Teacher 9"));
+//        courseSchedule.getLectureList().add(createLecture("Teacher 10"));
+//        courseSchedule.getLectureList().add(createLecture("Teacher 11"));
 
         return courseSchedule;
     }
 
-    private Lecture createLecture(String teacher) {
+    private Lecture createLecture(String teacher, int students) {
         Lecture lecture = new Lecture();
         lecture.setTeacher(teacher);
+        lecture.setStudents(students);
         return lecture;
     }
 

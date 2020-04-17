@@ -8,6 +8,7 @@ public class Lecture {
     private Integer roomNumber = 1;
     private Integer period = 1;
     private String teacher;
+    private Integer students;
 
 
     @PlanningVariable(valueRangeProviderRefs = {"availablePeriods"})
@@ -34,5 +35,13 @@ public class Lecture {
 
     public void setTeacher(String teacher) {
         this.teacher = teacher;
+    }
+
+    public Integer getStudents() {
+        return students;
+    }
+
+    public void setStudents(Integer students) {
+        this.students = students;
     }
 }

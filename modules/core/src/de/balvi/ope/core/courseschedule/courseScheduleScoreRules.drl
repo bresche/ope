@@ -11,24 +11,82 @@ rule "noNullRoomPeriod"
      scoreHolder.addHardConstraintMatch(kcontext, -1);
 end
 
-rule "periodAlreadyOccupied"
-    when
-        //compares two instances of Lecture (randomly picked?)
-        $lecture1: Lecture( $period : period );
-        $lecture2: Lecture( period == $period);
+     //Local Search phase (1) ended: time spent (30005), best score (-15hard/0soft), score calculation speed (680/sec), step total (16089).
+     //15:17:28.159 INFO  o.o.core.impl.solver.DefaultSolver      - Solving ended: time spent (30005), best score (-15hard/0soft), score calculation speed (673/sec), phase total (2), environment mode (REPRODUCIBLE).
+     //15:17:28.185 INFO  d.balvi.ope.web.screens.SolverScreen    - Lecture in Room 3 during Period 2 by Teacher 1
+     //Lecture in Room 2 during Period 3 by Teacher 2
+     //Lecture in Room 3 during Period 1 by Teacher 3
+     //Lecture in Room 1 during Period 2 by Teacher 4
+     //Lecture in Room 1 during Period 1 by Teacher 5
+     //Lecture in Room 3 during Period 3 by Teacher 6
+     //Lecture in Room 1 during Period 2 by Teacher 7
+     //Lecture in Room 2 during Period 1 by Teacher 8
+     //Lecture in Room 1 during Period 3 by Teacher 9
+     //Lecture in Room 1 during Period 1 by Teacher 10
+     //Lecture in Room 2 during Period 2 by Teacher 11
 
-    then
-        System.out.println("room " + $lecture1.getPeriod() + " & " + $lecture2.getPeriod() + " -1");
-        scoreHolder.addHardConstraintMatch(kcontext, -1);
+
+    rule "periodAndRoomAlreadyOccupied"
+         when
+             //compares two instances of Lecture (randomly picked?)
+             $lecture1: Lecture($period : period ; $roomNumber : roomNumber);
+             $lecture2: Lecture(period == $period && roomNumber == $roomNumber);
+
+         then
+             System.out.println("period " + $lecture1.getPeriod() + " & " + $lecture2.getPeriod() + " and " +
+                                "room " + $lecture1.getRoomNumber() + " & " + $lecture2.getRoomNumber() + " -1");
+             scoreHolder.addHardConstraintMatch(kcontext, -1);
+     end
+
+
+//Example with 7 lectures --> -50Soft Score because in period 1 there are 250 students
+//12:26:33.515 INFO  o.o.c.i.l.DefaultLocalSearchPhase       - Local Search phase (1) ended: time spent (30013), best score (-7hard/-50soft), score calculation speed (2394/sec), step total (38362).
+//12:26:33.516 INFO  o.o.core.impl.solver.DefaultSolver      - Solving ended: time spent (30014), best score (-7hard/-50soft), score calculation speed (2360/sec), phase total (2), environment mode (REPRODUCIBLE).
+//12:26:33.551 INFO  d.balvi.ope.web.screens.SolverScreen    - Lecture in Room 3 during Period 1 by Teacher 1
+//Lecture in Room 1 during Period 2 by Teacher 2
+//Lecture in Room 3 during Period 3 by Teacher 3
+//Lecture in Room 2 during Period 2 by Teacher 4
+//Lecture in Room 1 during Period 1 by Teacher 5
+//Lecture in Room 2 during Period 1 by Teacher 6
+//Lecture in Room 3 during Period 2 by Teacher 7
+
+
+rule "only 200 students present during 1 period in all rooms"
+        when
+            // i need to find all the lectures that have the same period and add all the student numbers
+         $lecture1: Lecture( $period: period)
+
+                accumulate( Lecture( period == $period, $students : students );
+                    $sum : sum( $students );
+                    $sum < 200 )
+
+        then
+            scoreHolder.addSoftConstraintMatch(kcontext, -50);
 end
 
-rule "roomAlreadyOccupied"
-    when
-        //compares two instances of Lecture
-        $lecture1: Lecture( $roomNumber : roomNumber );
-        $lecture2: Lecture( roomNumber == $roomNumber);
+//in order to simulate a a capacity. Maybe the internet doesn't work with 3 lectures running at the same time
+//With 7 Lectures input (--> 1 more than optimal)
+//15:29:52.047 INFO  o.o.c.i.l.DefaultLocalSearchPhase       - Local Search phase (1) ended: time spent (30009), best score (-7hard/-2150soft), score calculation speed (206/sec), step total (4765).
+//15:29:52.048 INFO  o.o.core.impl.solver.DefaultSolver      - Solving ended: time spent (30010), best score (-7hard/-2150soft), score calculation speed (204/sec), phase total (2), environment mode (REPRODUCIBLE).
+//15:29:52.074 INFO  d.balvi.ope.web.screens.SolverScreen    -
+//Lecture in Room 3 during Period 1 by Teacher 1
+//Lecture in Room 2 during Period 1 by Teacher 2
+//Lecture in Room 1 during Period 3 by Teacher 3
+//Lecture in Room 2 during Period 3 by Teacher 4
+//Lecture in Room 1 during Period 1 by Teacher 5
+//Lecture in Room 1 during Period 2 by Teacher 6
+//Lecture in Room 3 during Period 2 by Teacher 7
 
-    then
-        System.out.println("period " + $lecture1.getRoomNumber() + " & " + $lecture2.getRoomNumber() + " -1");
-        scoreHolder.addHardConstraintMatch(kcontext, -1);
-end
+
+//rule "only 2 lectures per period"
+//        when
+//            //compares two instances of Lecture (randomly picked?)
+//            $lecture1: Lecture( $period : period );
+//            $lecture2: Lecture( period == $period);
+//            $lecture3: Lecture( period == $period);
+//
+//        then
+//            scoreHolder.addSoftConstraintMatch(kcontext, -50);
+//            System.out.println("period " + $lecture1.getPeriod() + " & " +
+//            $lecture2.getPeriod() + " &" + $lecture3.getPeriod() + " - 50 Soft");
+//end
